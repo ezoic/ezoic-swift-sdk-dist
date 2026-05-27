@@ -59,8 +59,8 @@ let package = Package(
         // re-uploading the matching zip to GitHub Releases.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.0.0-rc4/EzoicAdsSDK-1.0.0-rc4.xcframework.zip",
-            checksum: "7bb95b44b45c7cd358190a9b0e6064bddf0a1a176d5ecfed9f2cb35216b9e7db"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.0.0-rc5/EzoicAdsSDK-1.0.0-rc5.xcframework.zip",
+            checksum: "42bd18a1fb90b98ebfcd2d9863bfab413af62c8bbc12869b82287939b5eaa587"
         ),
 
         // Source-level wrapper that re-exports the binary and wires
