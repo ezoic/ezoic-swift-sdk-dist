@@ -110,7 +110,7 @@ For App Tracking Transparency (recommended) also add:
 ## Versioning
 
 Versions in this repo mirror the underlying SDK version (e.g.,
-`1.0.0-rc4`). Stable releases (`1.0.0`, `1.1.0`, …) follow
+`1.0.0-rc5`). Stable releases (`1.0.0`, `1.1.0`, …) follow
 [semantic versioning](https://semver.org). Pre-release tags
 (`1.0.0-rc1`, `1.0.0-rc2`, …) carry the same parity contract as the
 Kotlin SDK release candidates on Maven Central.

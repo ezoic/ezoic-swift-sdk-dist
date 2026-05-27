@@ -4,9 +4,11 @@
 // This package contains *no* implementation code. The real
 // implementation lives in a private Ezoic repository and ships here
 // as a pre-built XCFramework attached to each GitHub Release. The
-// URL + checksum on the `.binaryTarget` below are bumped (atomically,
-// via CI) on every SDK release, the same way Maven Central artifacts
-// work for the Kotlin SDK.
+// URL + checksum on the `.binaryTarget` below are bumped (in a single
+// commit, alongside the GitHub Release create) on every SDK release,
+// the same way Maven Central artifacts work for the Kotlin SDK. The
+// source repo's release workflow + `Distribution/release-from-artifact.sh`
+// are the two supported entry points for that bump.
 //
 // Why two targets instead of one?
 // SwiftPM's `.binaryTarget` cannot declare dependencies. The
@@ -53,10 +55,12 @@ let package = Package(
         // Closed-source binary. Module name is `EzoicAdsSDKBinary`
         // so it doesn't collide with the wrapper target below.
         //
-        // CI keeps the URL + checksum in sync with the latest
-        // release; do NOT edit by hand without running
-        // `Distribution/build-xcframework.sh` in the source repo and
-        // re-uploading the matching zip to GitHub Releases.
+        // The URL + checksum below are bumped by the source repo's
+        // release pipeline (`.github/workflows/release-xcframework.yml`
+        // or `Distribution/release-from-artifact.sh` as the manual
+        // fallback) to stay in lock-step with the published GitHub
+        // Release on this repo. Do NOT edit by hand: a checksum
+        // mismatch breaks every consumer's SwiftPM resolution.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
             url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.0.0-rc5/EzoicAdsSDK-1.0.0-rc5.xcframework.zip",
