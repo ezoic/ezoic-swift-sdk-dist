@@ -1,0 +1,8 @@
+.build/
+.swiftpm/
+Package.resolved
+build/
+xcuserdata/
+DerivedData/
+*.xcframework
+*.xcframework.zip
