@@ -53,6 +53,20 @@ targets: [
 ]
 ```
 
+### CocoaPods
+
+```ruby
+pod 'EzoicAdsSDK', '~> 1.0'
+```
+
+Then `pod install`. The pod vends the same XCFramework as the SwiftPM
+distribution and brings in `PrebidMobile` and `Google-Mobile-Ads-SDK`
+transitively. In Swift, import the binary module:
+
+```swift
+import EzoicAdsSDKBinary
+```
+
 ## Quick start
 
 ```swift
