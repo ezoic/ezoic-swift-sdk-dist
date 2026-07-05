@@ -49,7 +49,15 @@ let package = Package(
         .package(
             url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
             "12.0.0" ..< "13.0.0"
-        )
+        ),
+
+        // Amazon Publisher Services (APS / TAM). The XCFramework's
+        // swiftinterface references `DTBiOSSDK`, so the wrapper target
+        // below pulls it onto the consumer's search path. Amazon has no
+        // official SPM; `adsbynimbus/swift-package-aps` is a checksum-
+        // pinned binary wrapper of the same artifact. Exact 5.3.3 to match
+        // the version the binary was compiled against.
+        .package(url: "https://github.com/adsbynimbus/swift-package-aps", exact: "5.3.3")
     ],
     targets: [
         // Closed-source binary. Module name is `EzoicAdsSDKBinary`
@@ -79,7 +87,8 @@ let package = Package(
                 .product(
                     name: "GoogleMobileAds",
                     package: "swift-package-manager-google-mobile-ads"
-                )
+                ),
+                .product(name: "DTBiOSSDK", package: "swift-package-aps")
             ],
             path: "Sources/EzoicAdsSDK"
         )

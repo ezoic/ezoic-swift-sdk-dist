@@ -25,8 +25,12 @@ Pod::Spec.new do |s|
 
   # The binary's .swiftinterface references these modules, so consumers need
   # them on the search path. CocoaPods pod names -> modules:
-  #   PrebidMobile           -> PrebidMobile
-  #   Google-Mobile-Ads-SDK  -> GoogleMobileAds
+  #   PrebidMobile               -> PrebidMobile
+  #   Google-Mobile-Ads-SDK      -> GoogleMobileAds
+  #   AmazonPublisherServicesSDK -> DTBiOSSDK
   s.dependency 'PrebidMobile', '~> 3.1'
   s.dependency 'Google-Mobile-Ads-SDK', '~> 12.0'
+  # Amazon APS (TAM). Exact 5.3.3: the compiled binary's DTBiOSSDK
+  # references are verified against the 5.3.3 headers.
+  s.dependency 'AmazonPublisherServicesSDK', '5.3.3'
 end
