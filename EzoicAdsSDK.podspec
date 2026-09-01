@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'EzoicAdsSDK'
-  s.version          = '1.5.0'
+  s.version          = '1.6.0'
   s.summary          = 'Ezoic Ads SDK for iOS (Prebid + Google Ad Manager).'
   s.description      = <<-DESC
     The official Ezoic Ads SDK for iOS. Closed-source binary distributed as an
