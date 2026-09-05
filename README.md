@@ -40,7 +40,7 @@ Xcode resolves two transitive packages alongside `EzoicAdsSDK`:
 dependencies: [
     .package(
         url: "https://github.com/ezoic/ezoic-swift-sdk-dist.git",
-        exact: "1.6.1"
+        exact: "1.7.0"
     )
 ],
 targets: [
