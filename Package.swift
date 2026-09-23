@@ -71,8 +71,8 @@ let package = Package(
         // mismatch breaks every consumer's SwiftPM resolution.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.10.1/EzoicAdsSDK-1.10.1.xcframework.zip",
-            checksum: "d04a29cbf66296e957a0fe4db7fefbb172c72d9d65d554f0217bfa4a5426e7e3"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.11.0/EzoicAdsSDK-1.11.0.xcframework.zip",
+            checksum: "b35375c690ce87b22634894c661bb020bd1a730a93d4be6ce33b683dd7fd1aec"
         ),
 
         // Source-level wrapper that re-exports the binary and wires
