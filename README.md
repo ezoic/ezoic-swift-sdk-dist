@@ -10,10 +10,10 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
 
 ## Requirements
 
-- iOS 14.0 or later
-- Xcode 15.0 or later (the framework was built with
-  `BUILD_LIBRARY_FOR_DISTRIBUTION=YES`, so module-stable across
-  consumer Swift versions)
+- iOS 15.0 or later (Xcode 27 enforces a 15.0 floor; the SDK is built with Xcode 26.6 and verified against Xcode 27)
+- Xcode 26.0 or later (the framework is built with Xcode 26.6 and
+  `BUILD_LIBRARY_FOR_DISTRIBUTION=YES`, so it is module-stable across
+  consumer Swift versions from 6.2 on; Xcode 27 is verified in CI)
 - Swift 5.9 or later
 
 ## Installation

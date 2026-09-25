@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/ezoic/ezoic-swift-sdk-dist'
   s.license          = { :type => 'Proprietary', :text => 'Copyright (c) 2026 Ezoic Inc. All rights reserved. Governed by the Ezoic Terms of Service at https://www.ezoic.com/terms' }
   s.author           = { 'Ezoic Inc' => 'support@ezoic.com' }
-  s.platform         = :ios, '14.0'
+  s.platform         = :ios, '15.0'
   s.swift_version    = '5.9'
 
   # The xcframework is downloaded from the matching GitHub Release. The zip's
