@@ -31,7 +31,9 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
 
 Xcode resolves two transitive packages alongside `EzoicAdsSDK`:
 
-- `prebid-mobile-ios` (3.1.0+) for header bidding
+- `prebid-mobile-ios` (pinned to the exact version the binary was built
+  against; currently 3.2.1) for header bidding. If your app also depends on
+  Prebid directly, use the same version.
 - `swift-package-manager-google-mobile-ads` (12.x) for GAM
 
 ### Swift Package Manager (Package.swift)

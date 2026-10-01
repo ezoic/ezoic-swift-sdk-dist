@@ -28,7 +28,11 @@ Pod::Spec.new do |s|
   #   PrebidMobile               -> PrebidMobile
   #   Google-Mobile-Ads-SDK      -> GoogleMobileAds
   #   AmazonPublisherServicesSDK -> DTBiOSSDK
-  s.dependency 'PrebidMobile', '~> 3.1'
+  # Exact: the static XCFramework links the consumer's PrebidMobile (it no
+  # longer embeds a private copy), and PrebidMobile's Swift ABI is not
+  # library-evolution stable — must match the version the binary was built
+  # against (source repo Package.resolved). Keep in step with Package.swift.
+  s.dependency 'PrebidMobile', '3.2.1'
   s.dependency 'Google-Mobile-Ads-SDK', '~> 12.0'
   # Amazon APS (TAM). Exact 5.3.3: the compiled binary's DTBiOSSDK
   # references are verified against the 5.3.3 headers.
