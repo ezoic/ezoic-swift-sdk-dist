@@ -16,10 +16,15 @@ Pod::Spec.new do |s|
 
   # The xcframework is downloaded from the matching GitHub Release. The zip's
   # top-level entry is `EzoicAdsSDKBinary.xcframework` (see build-xcframework.sh
-  # in the source repo). Do NOT re-zip a published release: the SHA changes and
-  # SwiftPM consumers break.
+  # in the source repo).
+  #
+  # CocoaPods gets its own `-cocoapods` build of the same sources: the
+  # PrebidMobile pod is built with BUILD_LIBRARY_FOR_DISTRIBUTION=YES while
+  # SwiftPM builds Prebid without it, and since the static framework links the
+  # host's Prebid it must be compiled against the matching ABI flavour. The
+  # SwiftPM zip (no suffix) will not link under CocoaPods and vice versa.
   s.source = {
-    :http => "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/#{s.version}/EzoicAdsSDK-#{s.version}.xcframework.zip"
+    :http => "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/#{s.version}/EzoicAdsSDK-#{s.version}-cocoapods.xcframework.zip"
   }
   s.vendored_frameworks = 'EzoicAdsSDKBinary.xcframework'
 
