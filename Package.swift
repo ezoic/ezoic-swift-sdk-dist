@@ -37,10 +37,17 @@ let package = Package(
     ],
     dependencies: [
         // Prebid Mobile SDK for header bidding.
-        // 3.1+ gives us `setImpORTBConfig` (used by the SDK to pass
-        // per-placement bidder configs through to sol's
-        // /m/apps/auction endpoint) and a SwiftPM-resolvable target.
-        .package(url: "https://github.com/prebid/prebid-mobile-ios.git", from: "3.1.0"),
+        //
+        // Pinned *exactly* to the version the binary was compiled against
+        // (the source repo's Package.resolved). The XCFramework is a static
+        // archive that does not carry its own copy of Prebid; it links the
+        // consumer's. PrebidMobile is a Swift module built without library
+        // evolution, so a different minor/patch can break the link
+        // ("Undefined symbol … PrebidMobile.…") or, worse, change type
+        // layouts silently. The release pipeline bumps this alongside the
+        // binaryTarget below whenever the source repo's resolved version
+        // changes.
+        .package(url: "https://github.com/prebid/prebid-mobile-ios.git", exact: "3.2.1"),
 
         // Google Mobile Ads SDK.
         // Pinned to 12.x because Prebid Mobile iOS 3.1+ requires it.
