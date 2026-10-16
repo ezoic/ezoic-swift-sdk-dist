@@ -11,7 +11,7 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
 ## Requirements
 
 - iOS 15.0 or later (Xcode 27 enforces a 15.0 floor; the SDK is built with Xcode 26.6 and verified against Xcode 27)
-- Xcode 26.0 or later (the framework is built with Xcode 26.6 and
+- Xcode 26.2 or later (the framework is built with Xcode 26.6 and
   `BUILD_LIBRARY_FOR_DISTRIBUTION=YES`, so it is module-stable across
   consumer Swift versions from 6.2 on; Xcode 27 is verified in CI)
 - Swift 5.9 or later
@@ -32,9 +32,9 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
 Xcode resolves two transitive packages alongside `EzoicAdsSDK`:
 
 - `prebid-mobile-ios` (pinned to the exact version the binary was built
-  against; currently 3.2.1) for header bidding. If your app also depends on
+  against; currently 3.4.1) for header bidding. If your app also depends on
   Prebid directly, use the same version.
-- `swift-package-manager-google-mobile-ads` (12.x) for GAM
+- `swift-package-manager-google-mobile-ads` (13.x) for GAM
 
 ### Swift Package Manager (Package.swift)
 

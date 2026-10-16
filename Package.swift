@@ -47,15 +47,16 @@ let package = Package(
         // layouts silently. The release pipeline bumps this alongside the
         // binaryTarget below whenever the source repo's resolved version
         // changes.
-        .package(url: "https://github.com/prebid/prebid-mobile-ios.git", exact: "3.2.1"),
+        .package(url: "https://github.com/prebid/prebid-mobile-ios.git", exact: "3.4.1"),
 
         // Google Mobile Ads SDK.
-        // Pinned to 12.x because Prebid Mobile iOS 3.1+ requires it.
-        // GMA 12 dropped the GAD/GAM Swift prefixes — see
-        // https://developers.google.com/admob/ios/migration#v11_to_v12.
+        // 13.x: the binary is compiled against GMA 13, and Prebid Mobile
+        // iOS 3.4+ declares GMA up to the next major from 13.0.0. GMA 13.4+
+        // needs Xcode 26.2 — see
+        // https://developers.google.com/admob/ios/migration#migrate-to-sdk-v13.
         .package(
             url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
-            "12.0.0" ..< "13.0.0"
+            "13.0.0" ..< "14.0.0"
         ),
 
         // Amazon Publisher Services (APS / TAM). The XCFramework's
