@@ -59,6 +59,12 @@ let package = Package(
             "13.0.0" ..< "14.0.0"
         ),
 
+        // Pinned exactly to the version the binary was compiled against.
+        .package(
+            url: "https://github.com/googleads/swift-package-manager-google-interactive-media-ads-ios",
+            exact: "3.33.0"
+        ),
+
         // Amazon Publisher Services (APS / TAM). The XCFramework's
         // swiftinterface references `DTBiOSSDK`, so the wrapper target
         // below pulls it onto the consumer's search path. Amazon has no
@@ -95,6 +101,10 @@ let package = Package(
                 .product(
                     name: "GoogleMobileAds",
                     package: "swift-package-manager-google-mobile-ads"
+                ),
+                .product(
+                    name: "GoogleInteractiveMediaAds",
+                    package: "swift-package-manager-google-interactive-media-ads-ios"
                 ),
                 .product(name: "DTBiOSSDK", package: "swift-package-aps")
             ],
