@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
   # against (source repo Package.resolved). Keep in step with Package.swift.
   s.dependency 'PrebidMobile', '3.4.1'
   s.dependency 'Google-Mobile-Ads-SDK', '~> 13.0'
-  # Amazon APS (TAM). Exact 5.3.3: the compiled binary's DTBiOSSDK
-  # references are verified against the 5.3.3 headers.
-  s.dependency 'AmazonPublisherServicesSDK', '5.3.3'
+  # Amazon APS (TAM). Exact 5.6.6, the version the binary is compiled against
+  # (same as the SwiftPM amzn/swift-package-manager-amazon-aps pin).
+  s.dependency 'AmazonPublisherServicesSDK', '5.6.6'
 end
