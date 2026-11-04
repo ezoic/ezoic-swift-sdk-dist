@@ -16,9 +16,6 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
   consumer Swift versions from 6.2 on; Xcode 27 is verified in CI)
 - Swift 5.9 or later
 - Google Mobile Ads 13.3 or later (Google's InMobi adapter requires it)
-- Swift Package Manager: `-ObjC` in your app target's **Build Settings →
-  Other Linker Flags** (CocoaPods adds it for you). Without it the linker
-  drops Google's InMobi adapter, and InMobi bids only server-side.
 
 ## Installation
 
@@ -49,8 +46,10 @@ Xcode resolves four transitive packages alongside `EzoicAdsSDK`:
   exactly adapter 11.5.0.0 / InMobi SDK 11.5.0), so InMobi bids through
   GAM SDK Bidding. Google pays for those impressions and they report as
   GAM. It embeds InMobi's dynamic `InMobiSDK.framework` (about 2.5 MB of
-  download size). Needs `-ObjC` (see Requirements). If your app also adds
-  Google's InMobi adapter, use the same version.
+  download size). The SDK links the adapter itself, so no `-ObjC` is
+  needed, and it can't be removed: the SDK references the adapter class
+  and fails to link without it. If your app also adds Google's InMobi
+  adapter, use the same version.
 
 ### Swift Package Manager (Package.swift)
 

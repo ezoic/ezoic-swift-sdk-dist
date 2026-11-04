@@ -44,8 +44,9 @@ Pod::Spec.new do |s|
   # (same as the SwiftPM amzn/swift-package-manager-amazon-aps pin).
   s.dependency 'AmazonPublisherServicesSDK', '5.6.6'
   # Google's InMobi mediation adapter (InMobi via GAM SDK Bidding), the same
-  # 11.5.0.0 as the SwiftPM googleads-mobile-ios-mediation-inmobi pin. The
-  # binary doesn't link it; GMA loads GADMediationAdapterInMobi by name
-  # (CocoaPods' -ObjC keeps it linked) and the SDK then sends `inmobi1`.
+  # 11.5.0.0 as the SwiftPM googleads-mobile-ios-mediation-inmobi pin.
+  # Required: the binary leaves GADMediationAdapterInMobi as an undefined
+  # symbol that this pod resolves, which links the adapter (GMA loads it by
+  # name) without -ObjC.
   s.dependency 'GoogleMobileAdsMediationInMobi', '11.5.0.0'
 end

@@ -71,10 +71,10 @@ let package = Package(
         .package(url: "https://github.com/amzn/swift-package-manager-amazon-aps.git", exact: "5.6.6"),
 
         // Google's InMobi mediation adapter (InMobi via GAM SDK Bidding).
-        // The binary does not import or link it: GMA instantiates
-        // `GADMediationAdapterInMobi` by class name, and the SDK advertises
-        // `inmobi1` when that class is linked into the app (hosts need
-        // `-ObjC`). Product InMobiAdapterTarget brings the static adapter
+        // Required: the binary leaves `GADMediationAdapterInMobi` (which
+        // GMA instantiates by class name) as an undefined symbol that this
+        // package resolves, so the adapter links into the app without
+        // `-ObjC`. Product InMobiAdapterTarget brings the static adapter
         // and InMobi's dynamic InMobiSDK. Tag 11.5.000 is adapter 11.5.0.0
         // (InMobi SDK 11.5.0); exact, same as the source repo.
         .package(url: "https://github.com/googleads/googleads-mobile-ios-mediation-inmobi.git", exact: "11.5.0")
