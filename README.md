@@ -15,6 +15,7 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
   `BUILD_LIBRARY_FOR_DISTRIBUTION=YES`, so it is module-stable across
   consumer Swift versions from 6.2 on; Xcode 27 is verified in CI)
 - Swift 5.9 or later
+- Google Mobile Ads 13.3 or later (Google's InMobi adapter requires it)
 
 ## Installation
 
@@ -29,17 +30,26 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
    stable releases use **Up to Next Major Version**.
 4. Add the `EzoicAdsSDK` library to your app target.
 
-Xcode resolves three transitive packages alongside `EzoicAdsSDK`:
+Xcode resolves four transitive packages alongside `EzoicAdsSDK`:
 
 - `prebid-mobile-ios-sdk` (https://github.com/prebid/prebid-mobile-ios-sdk,
   pinned to the exact version the binary was built against; currently
   3.4.1) for header bidding. If your app also depends on Prebid directly,
   use this URL and the same version.
-- `swift-package-manager-google-mobile-ads` (13.x) for GAM
+- `swift-package-manager-google-mobile-ads` (13.3 or later 13.x) for GAM
 - `swift-package-manager-amazon-aps`
   (https://github.com/amzn/swift-package-manager-amazon-aps, exactly
   5.6.6) for Amazon APS. If your app also adds Amazon's package, use the
   same version.
+- `googleads-mobile-ios-mediation-inmobi`
+  (https://github.com/googleads/googleads-mobile-ios-mediation-inmobi,
+  exactly adapter 11.5.0.0 / InMobi SDK 11.5.0), so InMobi bids through
+  GAM SDK Bidding. Google pays for those impressions and they report as
+  GAM. It embeds InMobi's dynamic `InMobiSDK.framework` (about 2.5 MB of
+  download size). The SDK links the adapter itself, so no `-ObjC` is
+  needed, and it can't be removed: the SDK references the adapter class
+  and fails to link without it. If your app also adds Google's InMobi
+  adapter, use the same version.
 
 ### Swift Package Manager (Package.swift)
 
@@ -72,8 +82,9 @@ pod 'EzoicAdsSDK', '~> 1.0'
 ```
 
 Then `pod install`. The pod vends a CocoaPods build of the same sources
-and brings in `PrebidMobile`, `Google-Mobile-Ads-SDK` and
-`AmazonPublisherServicesSDK` transitively. In Swift, import the binary
+and brings in `PrebidMobile`, `Google-Mobile-Ads-SDK`,
+`AmazonPublisherServicesSDK` and `GoogleMobileAdsMediationInMobi`
+transitively. In Swift, import the binary
 module:
 
 ```swift
@@ -133,6 +144,10 @@ For App Tracking Transparency (recommended) also add:
 <key>NSUserTrackingUsageDescription</key>
 <string>This identifier will be used to deliver personalized ads to you.</string>
 ```
+
+Add the SKAdNetwork IDs of the demand the SDK uses, InMobi's included, to
+`SKAdNetworkItems`. The full list is at
+[docs.ezoic.com/skadnetworkids.xml](https://docs.ezoic.com/skadnetworkids.xml).
 
 ## Versioning
 

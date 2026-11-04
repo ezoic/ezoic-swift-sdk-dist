@@ -38,8 +38,15 @@ Pod::Spec.new do |s|
   # library-evolution stable — must match the version the binary was built
   # against (source repo Package.resolved). Keep in step with Package.swift.
   s.dependency 'PrebidMobile', '3.4.1'
-  s.dependency 'Google-Mobile-Ads-SDK', '~> 13.0'
+  # 13.3+: GoogleMobileAdsMediationInMobi 11.5.0.0 requires it.
+  s.dependency 'Google-Mobile-Ads-SDK', '~> 13.3'
   # Amazon APS (TAM). Exact 5.6.6, the version the binary is compiled against
   # (same as the SwiftPM amzn/swift-package-manager-amazon-aps pin).
   s.dependency 'AmazonPublisherServicesSDK', '5.6.6'
+  # Google's InMobi mediation adapter (InMobi via GAM SDK Bidding), the same
+  # 11.5.0.0 as the SwiftPM googleads-mobile-ios-mediation-inmobi pin.
+  # Required: the binary leaves GADMediationAdapterInMobi as an undefined
+  # symbol that this pod resolves, which links the adapter (GMA loads it by
+  # name) without -ObjC.
+  s.dependency 'GoogleMobileAdsMediationInMobi', '11.5.0.0'
 end
