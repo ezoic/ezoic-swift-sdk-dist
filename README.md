@@ -29,12 +29,17 @@ Central as `com.ezoic.sdk:ezoic-ads-sdk`.
    stable releases use **Up to Next Major Version**.
 4. Add the `EzoicAdsSDK` library to your app target.
 
-Xcode resolves two transitive packages alongside `EzoicAdsSDK`:
+Xcode resolves three transitive packages alongside `EzoicAdsSDK`:
 
-- `prebid-mobile-ios` (pinned to the exact version the binary was built
-  against; currently 3.4.1) for header bidding. If your app also depends on
-  Prebid directly, use the same version.
+- `prebid-mobile-ios-sdk` (https://github.com/prebid/prebid-mobile-ios-sdk,
+  pinned to the exact version the binary was built against; currently
+  3.4.1) for header bidding. If your app also depends on Prebid directly,
+  use this URL and the same version.
 - `swift-package-manager-google-mobile-ads` (13.x) for GAM
+- `swift-package-manager-amazon-aps`
+  (https://github.com/amzn/swift-package-manager-amazon-aps, exactly
+  5.6.6) for Amazon APS. If your app also adds Amazon's package, use the
+  same version.
 
 ### Swift Package Manager (Package.swift)
 
@@ -55,15 +60,21 @@ targets: [
 ]
 ```
 
-### CocoaPods
+### CocoaPods (frozen)
+
+CocoaPods trunk becomes read-only on December 2, 2026. Versions already
+on trunk keep installing, but no new versions are published there after
+the last one pushed before December 1, 2026. Use Swift Package Manager
+to keep getting updates.
 
 ```ruby
 pod 'EzoicAdsSDK', '~> 1.0'
 ```
 
-Then `pod install`. The pod vends the same XCFramework as the SwiftPM
-distribution and brings in `PrebidMobile` and `Google-Mobile-Ads-SDK`
-transitively. In Swift, import the binary module:
+Then `pod install`. The pod vends a CocoaPods build of the same sources
+and brings in `PrebidMobile`, `Google-Mobile-Ads-SDK` and
+`AmazonPublisherServicesSDK` transitively. In Swift, import the binary
+module:
 
 ```swift
 import EzoicAdsSDKBinary
