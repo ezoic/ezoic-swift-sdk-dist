@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'EzoicAdsSDK'
-  s.version          = '1.19.1'
+  s.version          = '1.21.0'
   s.summary          = 'Ezoic Ads SDK for iOS (Prebid + Google Ad Manager).'
   s.description      = <<-DESC
     The official Ezoic Ads SDK for iOS. Closed-source binary distributed as an
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   s.dependency 'PrebidMobile', '3.4.1'
   s.dependency 'Google-Mobile-Ads-SDK', '~> 13.0'
   s.dependency 'GoogleAds-IMA-iOS-SDK', '3.33.0'
-  # Amazon APS (TAM). Exact 5.3.3: the compiled binary's DTBiOSSDK
-  # references are verified against the 5.3.3 headers.
-  s.dependency 'AmazonPublisherServicesSDK', '5.3.3'
+  # Amazon APS (TAM). Exact 5.6.6, the version the binary is compiled against
+  # (same as the SwiftPM amzn/swift-package-manager-amazon-aps pin).
+  s.dependency 'AmazonPublisherServicesSDK', '5.6.6'
 end

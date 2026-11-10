@@ -46,8 +46,11 @@ let package = Package(
         // ("Undefined symbol … PrebidMobile.…") or, worse, change type
         // layouts silently. The release pipeline bumps this alongside the
         // binaryTarget below whenever the source repo's resolved version
-        // changes.
-        .package(url: "https://github.com/prebid/prebid-mobile-ios.git", exact: "3.4.1"),
+        // changes. prebid-mobile-ios-sdk is Prebid's SwiftPM package (same
+        // sources and tags as prebid-mobile-ios); an app that depends on
+        // Prebid directly must use this URL too, or SwiftPM sees two
+        // `PrebidMobile` targets.
+        .package(url: "https://github.com/prebid/prebid-mobile-ios-sdk.git", exact: "3.4.1"),
 
         // Google Mobile Ads SDK.
         // 13.x: the binary is compiled against GMA 13, and Prebid Mobile
@@ -67,11 +70,10 @@ let package = Package(
 
         // Amazon Publisher Services (APS / TAM). The XCFramework's
         // swiftinterface references `DTBiOSSDK`, so the wrapper target
-        // below pulls it onto the consumer's search path. Amazon has no
-        // official SPM; `adsbynimbus/swift-package-aps` is a checksum-
-        // pinned binary wrapper of the same artifact. Exact 5.3.3 to match
-        // the version the binary was compiled against.
-        .package(url: "https://github.com/adsbynimbus/swift-package-aps", exact: "5.3.3")
+        // below pulls it onto the consumer's search path through Amazon's
+        // official package (product AmazonPublisherServicesSDK). Exact
+        // 5.6.6 to match the version the binary was compiled against.
+        .package(url: "https://github.com/amzn/swift-package-manager-amazon-aps.git", exact: "5.6.6")
     ],
     targets: [
         // Closed-source binary. Module name is `EzoicAdsSDKBinary`
@@ -85,8 +87,8 @@ let package = Package(
         // mismatch breaks every consumer's SwiftPM resolution.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.19.1/EzoicAdsSDK-1.19.1.xcframework.zip",
-            checksum: "1a4fabae7477512089193fb50b975a4bc2c2901aefa40f0d796fe06458cc83e2"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.21.0/EzoicAdsSDK-1.21.0.xcframework.zip",
+            checksum: "f655627c786cbb8590605329b2b5e9f3f5a1fda8ccda6925a604be9c822c2cf4"
         ),
 
         // Source-level wrapper that re-exports the binary and wires
@@ -97,7 +99,7 @@ let package = Package(
             name: "EzoicAdsSDK",
             dependencies: [
                 .target(name: "EzoicAdsSDKBinary"),
-                .product(name: "PrebidMobile", package: "prebid-mobile-ios"),
+                .product(name: "PrebidMobile", package: "prebid-mobile-ios-sdk"),
                 .product(
                     name: "GoogleMobileAds",
                     package: "swift-package-manager-google-mobile-ads"
@@ -106,7 +108,10 @@ let package = Package(
                     name: "GoogleInteractiveMediaAds",
                     package: "swift-package-manager-google-interactive-media-ads-ios"
                 ),
-                .product(name: "DTBiOSSDK", package: "swift-package-aps")
+                .product(
+                    name: "AmazonPublisherServicesSDK",
+                    package: "swift-package-manager-amazon-aps"
+                )
             ],
             path: "Sources/EzoicAdsSDK"
         )
