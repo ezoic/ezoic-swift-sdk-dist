@@ -85,8 +85,8 @@ let package = Package(
         // the source repo). Do NOT edit by hand.
         .binaryTarget(
             name: "EzoicCmpSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/0.0.0/EzoicCmpSDK-0.0.0.xcframework.zip",
-            checksum: "0000000000000000000000000000000000000000000000000000000000000000"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.22.0/EzoicCmpSDK-1.22.0.xcframework.zip",
+            checksum: "f3e2f537e231aa1de4562c001c20239ac0c270ba2c0a04cd02bc6c4d5a5efac2"
         ),
 
         // Wrapper for the CMP alone. Contains exactly one Swift file:
@@ -111,8 +111,8 @@ let package = Package(
         // mismatch breaks every consumer's SwiftPM resolution.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.21.0/EzoicAdsSDK-1.21.0.xcframework.zip",
-            checksum: "f655627c786cbb8590605329b2b5e9f3f5a1fda8ccda6925a604be9c822c2cf4"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.22.0/EzoicAdsSDK-1.22.0.xcframework.zip",
+            checksum: "e216720ccf3b3dad324d1c3fd09b9f97facad5cef6732bdda66e256762c637b0"
         ),
 
         // Source-level wrapper that re-exports the binary and wires
