@@ -32,6 +32,7 @@ Pod::Spec.new do |s|
   # them on the search path. CocoaPods pod names -> modules:
   #   PrebidMobile               -> PrebidMobile
   #   Google-Mobile-Ads-SDK      -> GoogleMobileAds
+  #   GoogleAds-IMA-iOS-SDK      -> GoogleInteractiveMediaAds
   #   AmazonPublisherServicesSDK -> DTBiOSSDK
   # Exact: the static XCFramework links the consumer's PrebidMobile (it no
   # longer embeds a private copy), and PrebidMobile's Swift ABI is not
@@ -39,6 +40,7 @@ Pod::Spec.new do |s|
   # against (source repo Package.resolved). Keep in step with Package.swift.
   s.dependency 'PrebidMobile', '3.4.1'
   s.dependency 'Google-Mobile-Ads-SDK', '~> 13.0'
+  s.dependency 'GoogleAds-IMA-iOS-SDK', '3.33.0'
   # Amazon APS (TAM). Exact 5.6.6, the version the binary is compiled against
   # (same as the SwiftPM amzn/swift-package-manager-amazon-aps pin).
   s.dependency 'AmazonPublisherServicesSDK', '5.6.6'
