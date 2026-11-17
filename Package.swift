@@ -3,9 +3,12 @@
 //
 // This package contains *no* implementation code. The real
 // implementation lives in a private Ezoic repository and ships here
-// as a pre-built XCFramework attached to each GitHub Release. The
-// URL + checksum on the `.binaryTarget` below are bumped (in a single
-// commit, alongside the GitHub Release create) on every SDK release,
+// as two pre-built XCFrameworks attached to each GitHub Release: the
+// built-in CMP (`EzoicCmpSDKBinary`, also its own product `EzoicCmpSDK`
+// for apps that don't use Ezoic ads) and the ads SDK (`EzoicAdsSDKBinary`,
+// which imports the CMP). The URL + checksum on each `.binaryTarget`
+// below are bumped (in a single commit, alongside the GitHub Release
+// create) on every SDK release,
 // the same way Maven Central artifacts work for the Kotlin SDK. The
 // source repo's release workflow + `Distribution/release-from-artifact.sh`
 // are the two supported entry points for that bump.
@@ -33,6 +36,12 @@ let package = Package(
         .library(
             name: "EzoicAdsSDK",
             targets: ["EzoicAdsSDK"]
+        ),
+        // The built-in TCF CMP alone, for Ezoic publishers whose app doesn't
+        // use Ezoic ads. EzoicAdsSDK already includes it: add one, not both.
+        .library(
+            name: "EzoicCmpSDK",
+            targets: ["EzoicCmpSDK"]
         )
     ],
     dependencies: [
@@ -76,6 +85,27 @@ let package = Package(
         .package(url: "https://github.com/amzn/swift-package-manager-amazon-aps.git", exact: "5.6.6")
     ],
     targets: [
+        // Closed-source CMP binary, module `EzoicCmpSDKBinary`. No
+        // dependencies. URL + checksum are bumped by the release pipeline
+        // like the ads binary below (Distribution/bump-dist-manifest.sh in
+        // the source repo). Do NOT edit by hand.
+        .binaryTarget(
+            name: "EzoicCmpSDKBinary",
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.23.1/EzoicCmpSDK-1.23.1.xcframework.zip",
+            checksum: "3c614e4e3e0905ab3b034e28e061d0e3d14adfe825d160afc156400c4670c26d"
+        ),
+
+        // Wrapper for the CMP alone. Contains exactly one Swift file:
+        // `Sources/EzoicCmpSDK/Exports.swift`, with
+        // `@_exported import EzoicCmpSDKBinary`.
+        .target(
+            name: "EzoicCmpSDK",
+            dependencies: [
+                .target(name: "EzoicCmpSDKBinary")
+            ],
+            path: "Sources/EzoicCmpSDK"
+        ),
+
         // Closed-source binary. Module name is `EzoicAdsSDKBinary`
         // so it doesn't collide with the wrapper target below.
         //
@@ -87,18 +117,20 @@ let package = Package(
         // mismatch breaks every consumer's SwiftPM resolution.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.21.0/EzoicAdsSDK-1.21.0.xcframework.zip",
-            checksum: "f655627c786cbb8590605329b2b5e9f3f5a1fda8ccda6925a604be9c822c2cf4"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.23.1/EzoicAdsSDK-1.23.1.xcframework.zip",
+            checksum: "ad1db13bfb53f342178a1f602adf422cf5e82ef6386c33c125fda3ac8b2ee082"
         ),
 
         // Source-level wrapper that re-exports the binary and wires
         // up the transitive SwiftPM dependencies. Contains exactly one
         // Swift file: `Sources/EzoicAdsSDK/Exports.swift`, with
-        // `@_exported import EzoicAdsSDKBinary`.
+        // `@_exported import EzoicAdsSDKBinary`. EzoicAdsSDKBinary
+        // re-exports EzoicCmpSDKBinary, which must be linked too.
         .target(
             name: "EzoicAdsSDK",
             dependencies: [
                 .target(name: "EzoicAdsSDKBinary"),
+                .target(name: "EzoicCmpSDKBinary"),
                 .product(name: "PrebidMobile", package: "prebid-mobile-ios-sdk"),
                 .product(
                     name: "GoogleMobileAds",
