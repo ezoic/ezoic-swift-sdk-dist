@@ -112,22 +112,22 @@ let package = Package(
         // The consent core. No dependencies.
         .binaryTarget(
             name: "EzoicConsentCoreBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/0.0.0/EzoicConsentCore-0.0.0.xcframework.zip",
-            checksum: "0000000000000000000000000000000000000000000000000000000000000000"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.24.0/EzoicConsentCore-1.24.0.xcframework.zip",
+            checksum: "422bef491166ec8eb1a7c208f17978a515b5b238e505634ca32d7103160d9edc"
         ),
 
         // The built-in CMP. Imports the core.
         .binaryTarget(
             name: "EzoicCmpSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.23.2/EzoicCmpSDK-1.23.2.xcframework.zip",
-            checksum: "db10ff960cc656cf371f8c6d8cf81af1c2f4a006db473940427e920499d2a72c"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.24.0/EzoicCmpSDK-1.24.0.xcframework.zip",
+            checksum: "e1810dad1dba4965a68ee4be52d093a679ba9a023604498a8d2853e2c31f9e1a"
         ),
 
         // The ads SDK. Imports the core; never the CMP.
         .binaryTarget(
             name: "EzoicAdsSDKBinary",
-            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.23.2/EzoicAdsSDK-1.23.2.xcframework.zip",
-            checksum: "678093ee69d717922102799050b5b78422a12ebf11641b5beec1947751773694"
+            url: "https://github.com/ezoic/ezoic-swift-sdk-dist/releases/download/1.24.0/EzoicAdsSDK-1.24.0.xcframework.zip",
+            checksum: "d3bd51c37c23f0adc0fd2036777591d4401336b6226e1964562586f8034d6f0a"
         ),
 
         // Wrapper for the core. One Swift file:

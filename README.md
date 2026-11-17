@@ -58,7 +58,7 @@ Xcode resolves three transitive packages alongside `EzoicAdsSDK`:
 dependencies: [
     .package(
         url: "https://github.com/ezoic/ezoic-swift-sdk-dist.git",
-        exact: "1.23.2"
+        exact: "1.24.0"
     )
 ],
 targets: [
