@@ -88,6 +88,9 @@ behaves exactly as with `cmpEnabled = false`; none of the built-in CMP's
 code is in your app. `EzoicAds.isBuiltInCmpIncluded` is `false` in such an
 app. Available from 1.24.0.
 
+Don't combine `EzoicAdsSDKWithoutCMP` with the `EzoicCmpSDK` product: an app
+that uses Ezoic ads and the built-in CMP adds `EzoicAdsSDK`, which includes it.
+
 ### CocoaPods (frozen)
 
 CocoaPods trunk becomes read-only on December 2, 2026. Versions already
